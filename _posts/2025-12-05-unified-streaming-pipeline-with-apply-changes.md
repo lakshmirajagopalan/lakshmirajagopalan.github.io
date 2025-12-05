@@ -1,16 +1,16 @@
 ---
 layout: post
-title: Unified Streaming Pipeline: Intelligent Multi-Source Deduplication with APPLY CHANGES
+title: "Unified Streaming Pipeline: Intelligent Multi-Source Deduplication with APPLY CHANGES"
 categories: [Blogging, Data Engineering]
 tags: [databricks, dlt, spark, performance]
 seo:
-  date_modified: 2025-12-04 20:00:00 +0530
+  date_modified: 2025-12-05 18:00:00 +0530
 ---
 
 
-One of the most challenging problems I’ve solved recently was figuring out how to **collate events arriving from multiple source systems**, each with its own delivery pattern, format, and reliability model — *without losing streaming semantics*.  
+One of the most challenging problems I’ve solved recently was figuring out how to **collate events arriving from multiple source systems**, each with its own delivery pattern, format, and reliability model without losing streaming semantics.  
 
-In theory, a Lakehouse should help unify everything. In practice, when an event can originate from:
+In theory, a Lakehouse should help unify everything. However in practice, when an event can originate from:
 
 - a Kafka topic  
 - application logs  
@@ -20,11 +20,11 @@ In theory, a Lakehouse should help unify everything. In practice, when an event 
 - async responses over HTTP  
 - or even partner system batch drops  
 
-…you quickly realize that nothing in the real world arrives consistently, and nothing is guaranteed to be “the one true source.”
+you quickly realize that nothing in the real world arrives consistently, and nothing is guaranteed to be “the one true source.”
 
-For my "workflow event" pipeline, an event could come from literally **any** of these source systems. And to power downstream analytics, user KPIs, vendor performance insights, and business dashboards, I needed to build a **single, unified, deduped stream**.
+For example, in my analytics pipeline, an event could come from literally **any** of these source systems. And to power downstream analytics, user KPIs, vendor performance insights, and business dashboards, I needed to build a **single, unified, deduped stream**.
 
-This turned into a fascinating engineering challenge.
+This turned into a fascinating data engineering challenge.
 
 ---
 
@@ -32,7 +32,7 @@ This turned into a fascinating engineering challenge.
 
 At first, the naive approach seems obvious:
 
-> “Just read all the sources in batch mode, join them, dedupe them, and output one clean table.”
+“Just read all the sources in batch mode, join them, dedup them, and output one clean table.”
 
 But the moment you treat any source as batch instead of streaming, you immediately lose what makes streaming valuable:
 
@@ -46,14 +46,14 @@ But the moment you treat any source as batch instead of streaming, you immediate
 
 Once the pipeline becomes “batch-first,” everything downstream becomes batch too — which meant:
 
-❌ no more real-time analytics  
-❌ no more near-instant vendor monitoring  
-❌ no more user behavior freshness  
-❌ no more true incremental transformations
+- no more real-time analytics  
+- no more near-instant vendor monitoring  
+- no more user behavior freshness  
+- no more true incremental transformations
 
 So the design constraint became:
 
-# **Every input MUST remain a streaming source all the way through Silver.**
+**Every input MUST remain a streaming source all the way through Silver.**
 
 Only then can I guarantee that transformations, enrichment, metadata tagging, and joins remained incremental.
 
@@ -111,10 +111,9 @@ At this stage, the events still look like:
 
 But the key is:
 
-> **All this happens in streaming mode.**  
-> Each stream flows independently through DLT transformations, but ultimately lands in a unified schema.
+> *All this happens in streaming mode.*
 
-Now I have a “multi-source unlock stream,” but with duplicates, retries, partial failures, and conflicting event-level truth.
+Each stream flows independently through DLT transformations, but ultimately lands in a unified schema. Now I have a "multi-source unlock stream," but with duplicates, retries, partial failures, and conflicting event-level truth.
 
 This leads to the next problem.
 
@@ -147,9 +146,9 @@ Which one is correct?
 Which one should dashboards show?  
 Which one should metrics compute?
 
-And how do you dedupe this **without dropping streaming semantics**?
+And how do you dedup this **without dropping streaming semantics**?
 
-Traditional methods such as windowed dedupe or batch dedupe simply don’t work reliably, especially when late-arriving data from vendors can appear long after the original event.
+Traditional methods such as windowed dedup or batch dedup simply don’t work reliably, especially when late-arriving data from vendors can appear long after the original event.
 
 ---
 
@@ -176,11 +175,12 @@ Examples:
 | fallback          | 0.25                 |
 | noise             | 0.10                 |
 
-Whichever event has the **highest sequence value** becomes the “official truth.”
+Whichever event has the **highest sequence value** becomes the “official truth.” 
+Note: I have used Logical precedence based on confidence, instead of temporal precedence.
 
 This gives me:
 
-- deterministic dedupe  
+- deterministic dedup  
 - correct event selection  
 - full streaming semantics preserved  
 - late arrivals handled gracefully  
@@ -191,10 +191,12 @@ This gives me:
 
 It acts like a MERGE, but incrementally:
 
+```
 APPLY CHANGES INTO unified_events
 FROM silver_multi_source_stream
 KEY (event_id)
 SEQUENCE BY confidence_sequence
+```
 
 
 The row with the highest `confidence_score` wins.
@@ -269,13 +271,13 @@ These Gold tables:
 
 Here are the principles that made the pipeline stable and scalable:
 
-✔ Treat all inputs as **streams**, even if they aren’t  
-✔ Perform cleaning and enrichment before merging anything  
-✔ Normalize schemas so events can be collated reliably  
-✔ Use `APPLY CHANGES` with confidence scoring for dedupe  
-✔ End streaming where business events stabilize  
-✔ Build Gold tables in batch — it’s simpler and faster  
-✔ Align Gold tables to business questions, not raw schemas  
+- Treat all inputs as **streams**, even if they aren’t  
+- Perform cleaning and enrichment before merging anything  
+- Normalize schemas so events can be collated reliably  
+- Use `APPLY CHANGES` with confidence scoring for dedup  
+- End streaming where business events stabilize  
+- Build Gold tables in batch — it’s simpler and faster  
+- Align Gold tables to business questions, not raw schemas  
 
 This design lets me plug in new upstream systems without major rewrites, and guarantees that dashboards always reflect consistent truth.
 
