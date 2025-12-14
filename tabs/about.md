@@ -3,10 +3,12 @@ layout: page
 title: About
 ---
 
-Hi, I am lakshmi. A chennaiite with passion for computer science and gaming.
-When I am bored of the sitting for days before the computer, or when the thought of my life hits me, I travel with my husband. 
+Hi, I'm Lakshmi — a Chennaiite with a long-standing love for computer science, data systems, and and the occasional gaming break.  
+When I'm not deep into pipelines or architecture diagrams, I’m usually traveling with my husband or exploring new places to clear my head.
 
-Professionally, I am a sofware engineer with 6 years of experience in Scala and functional programming. My interests includes search-engines, databases, system designs and functional programming (Ofcourse!).
+Professionally, I’m a senior data engineer and architect with over 12 years of experience across the data ecosystem.  
+I work extensively with Databricks, Spark, Scala, distributed systems, and large-scale data pipelines.  
+My interests span data architecture, system design, search systems, and the evolving intersection of AI and engineering.
 
-Connect with me at: **[404] BirdPerson** in Steam. More info on my games at [dotabuff](https://www.dotabuff.com/players/144760510)..
-
+Connect with me on LinkedIn:  
+**[Lakshmi Rajagopalan](https://www.linkedin.com/in/lakshmi-rajagopalan-13b07838/)**
