@@ -2,7 +2,7 @@
 layout: post
 title: "AI, Data Teams, and the New Silos: A Lesson From Cost Optimization"
 categories: [Blogging, Data Engineering]
-tags: [ai, silo, dataengineering, cost]
+tags: [artificial intelligence, data engineering, databricks, cost optimization]
 seo:
   date_modified: 2025-12-05 18:00:00 +0530
 ---

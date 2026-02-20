@@ -2,7 +2,7 @@
 layout: post
 title: Performance Issues with Parallel Branching in Delta Live Tables 
 categories: [Blogging, Data Engineering]
-tags: [databricks, dlt, spark, performance]
+tags: [databricks, data engineering, dlt, spark, performance]
 seo:
   date_modified: 2025-12-04 20:00:00 +0530
 ---

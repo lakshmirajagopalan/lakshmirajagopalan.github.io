@@ -2,7 +2,7 @@
 layout: post
 title: "Unified Streaming Pipeline: Intelligent Multi-Source Deduplication with APPLY CHANGES"
 categories: [Blogging, Data Engineering]
-tags: [databricks, dlt, spark, performance]
+tags: [databricks, data engineering, dlt, spark, performance]
 seo:
   date_modified: 2025-12-05 18:00:00 +0530
 ---

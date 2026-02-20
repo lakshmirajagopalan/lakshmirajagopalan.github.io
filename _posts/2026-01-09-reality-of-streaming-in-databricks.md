@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Streaming in Databricks: Where Expectations Meet Reality"
+title: "Streaming in Databricks: When Expectations Meet Reality"
 categories: [Blogging, Data Engineering]
-tags: [databricks, structured streaming, dlt, dataengineering]
+tags: [databricks, structured streaming, dlt, data engineering]
 seo:
   date_modified: 2026-01-09 19:00:00 +0530
 ---
