@@ -371,3 +371,28 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
     margin-right: calc((100% - 1150px) / 8 + 300px);
   }
 }
+
+h2 {
+  color: rgb(42, 30, 107);
+  font-weight: bold;
+}
+
+h3 {
+  color: rgb(42, 30, 107);
+}
+
+h4 {
+  color: rgb(42, 30, 107);
+  font-style: italic;
+}
+
+mjx-container[display="true"] {
+  background: rgb(20, 12, 62);
+  color: #ffffff;
+  padding: 1em;
+  border-radius: 0.5rem;
+}
+
+mjx-mtd {
+  text-align: left !important;
+}

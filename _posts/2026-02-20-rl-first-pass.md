@@ -37,13 +37,10 @@ RL has 4 major components:
 
 ### 1. Policy (π)
 Defines the agent's behaviour. It maps state -> action
-
 ### 2. Reward Signal (R)
 The immediate feedback signal. 
-
 ### 3. Value function (Q)
-Estimates how good is state/action in the long run. 
-
+Estimates how good is state/action in the long run.
 ### 4. Model(Optional)
 A model(optional) to predict what next state will occur and what reward will be received.  
 With model - we can plan  
@@ -63,17 +60,21 @@ Always exploit the highest estimated value. But can get stuck in suboptimal acti
 Explore with probability $\epsilon$, exploit with prob 1-$\epsilon$
 
 ## 5. Modes of learning
+
 #### Trial and error
 - originates from animal learning
+
 #### Optimal Control 
 - uses *Value functions* to act optimallly for long-term reward
+
 #### Temporal Difference
 - uses *secondary reinforcers* in addition to primary reinforcers.
 
 ## Chapter 2: Multi-Armed Bandits
 Simple - no states just considering actions and feedback.
 
-In k-armed bandit problem, each of the k action has a expected reward-*value* for a selected action 'a'.  
+In k-armed bandit problem, each of the k action has a expected reward-*value* for a selected action 'a'.
+
 $$
 q^{*}(a) = E[R_t | A_t=a]
 $$
@@ -94,16 +95,17 @@ $$
 and for greedy case, the action chosen then is
 
 $$
-A_t = argmax Q_t(a)\ over\ all\ action\ a
+A_t = argmax\ Q_t(a)\ over\ all\ action\ a
 $$
 
 *Incremental computation* of the estimated value fn:
 
 $$
-\begin{aligned}
-Q_{n+1} = Q_n + \frac{1}{n}[R_n - Q_n] \\ 
+\begin{align}
+Q_{n+1} = Q_n + \frac{1}{n}[R_n - Q_n] \\\\
+
 NewEstimate = OldEstimate + LearningRate[Target - OldEstimate]
-\end{aligned}
+\end{align}
 $$
 
 The learning rate, $\alpha = \frac{1}{n}$ changes with each step(time) and works for stationary bandit problems - where the reward probabilities do not change over time.
@@ -127,13 +129,15 @@ $$
 When rewards are +ve and the initial *Q<sub>1</sub>* is set 0, the first action(say: a) always increase only *Q<sub>a</sub>* causing the agent to get stuck and greedy pick only this. Setting the initial estimates to higher value (> the max reward for each action), cause any initial action to lower the Q(based on exponential-recency weighted average) thus encouraging exploration of other actions.
 
 #### 2. Upper Confidence Bound (UCB)
-Explore the non-greedy actions not randomly but more principled - based on how optimal they are.
+Explore the non-greedy actions not randomly but more principled - based on how optimal they are.  
+
 $$
-\begin{aligned}
-A_t = argmax[Q_t(a) +c\sqrt{\frac{ln\ t}{N_t(a)}}] \\
-= argmax [estimated + uncertainity]
-\end{aligned}
+\begin{align}
+A_t = argmax[Q_t(a) +c\sqrt{\frac{ln\ t}{N_t(a)}}] \\\\
+\ \ \ = argmax [estimated + uncertainity]
+\end{align}
 $$
+
 Here, we are assuming that the upper bound for the value could be *value <= Estimate + uncertainity* (hence the term).
 
 Q<sub>t</sub> is the exploitation portion and the second part is the exploration-uncertainity portion.  
@@ -147,9 +151,7 @@ Using the natural log in numerator, makes the uncertainity increase get smaller 
 Another approach to selecting an action, is to find a preference(**H<sub>t</sub>(a)**) for an action instead of the value(**Q<sub>t</sub>(a)**) of an action. Preference is relative to other actions and we take a softmax to get the probability
 of each action.
 
-$$
-\pi_t(a) = \frac{e^{H_t(a)}}{\sum_{b=1}^{k}{e^{H_t(b)}}}
-$$
+$$\pi_t(a) = \frac{e^{H_t(a)}}{\sum_{b=1}^{k}{e^{H_t(b)}}}$$
 
 All initial preferences are 0 **H<sub>1</sub>(a)=0**. The learning algo to incrementally updates the preference based on the gradient ascent as
 

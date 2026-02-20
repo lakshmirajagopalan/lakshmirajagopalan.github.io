@@ -143,9 +143,16 @@
   <!-- MathJax for LaTeX support -->
   <script>
     MathJax = {
+      output: {
+        displayAlign: 'left'
+      },
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      chtml: {
+        displayIndent: "0em",
+        displayAlign: 'left'
       },
       svg: {
         fontCache: 'global'
