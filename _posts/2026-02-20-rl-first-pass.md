@@ -7,7 +7,7 @@ seo:
   date_modified: 2026-02-21 00:00:00 +0530
 ---
 
-I came across this big book *Reinforcement Learning by R S Sutton* at the library today.
+I came across the book *Reinforcement Learning by R S Sutton* at the library today.
 With AI agents becoming more common, I felt it will be important to understand how we can guide and reinforce their behavior in a structured way.
 
 I managed to get through the first couple of chapters only. It is definitely dense and technical, so I left some of the exercises for later. But even from the early chapters, I am starting to get a clearer picture of the core ideas.
@@ -167,6 +167,10 @@ $\bar{R_t}$ - average rewards upto t (also a baseline).
 ${R_t - \bar{R_t}}$ - how better is the reward now with this action A<sub>t</sub>.
 If the diff is +ve, increase the preference for this action, decrease the preferences for other actions and vice-versa.
 ${(1 - \pi_t(A_t))}$ - If the action is already highly prefered, then change should be less and rare actions should be rewarded more.
+
+### Code Samples for the exercises
+My Python implementation of the sample-average method is available on GitHub:
+[RL Workbook – Bandit Problem](https://github.com/lakshmirajagopalan/rl-workbook/blob/main/karmed_bandits.ipynb)
 
 
 
