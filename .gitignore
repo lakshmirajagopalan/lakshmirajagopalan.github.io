@@ -1,6 +1,9 @@
 _site
 *.pyc
 .jekyll-cache
-GemFile.lock
+.bundle/
+vendor/
 *.DS_Store
 *~
+.claude/settings.local.json
+.claude/agent-memory/
