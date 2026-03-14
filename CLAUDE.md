@@ -8,18 +8,18 @@ This is a personal blog built with Jekyll using the [Chirpy theme](https://githu
 
 ## Commands
 
-`bundle` is not on PATH by default. Use the full path:
+`bundle` is not on PATH by default. Use the full path (Homebrew Ruby 4.x at `/usr/local/opt/ruby/bin/`):
 
 ```bash
 # Install dependencies (first time or after Gemfile changes)
-~/.local/share/gem/ruby/3.3.0/bin/bundle install
+/usr/local/opt/ruby/bin/bundle install
 
 # Serve locally with live reload
-~/.local/share/gem/ruby/3.3.0/bin/bundle exec jekyll serve --livereload
+/usr/local/opt/ruby/bin/bundle exec jekyll serve --livereload
 # Site available at http://127.0.0.1:4000/
 
 # Build only (no server)
-~/.local/share/gem/ruby/3.3.0/bin/bundle exec jekyll build
+/usr/local/opt/ruby/bin/bundle exec jekyll build
 ```
 
 ## Adding Content
